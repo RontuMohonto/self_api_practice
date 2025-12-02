@@ -1,39 +1,38 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class response extends StatefulWidget {
-  response({super.key});
+class ResponsePage extends StatefulWidget {
+  const ResponsePage({super.key});
 
+  @override
+  State<ResponsePage> createState() => _ResponsePageState();
+}
+
+class _ResponsePageState extends State<ResponsePage> {
   List<dynamic> posts = [];
 
   Future fetchData() async {
     final url = Uri.parse("https://appapi.coderangon.com/api/slider");
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      log("success");
+    final res = await http.get(url);
 
-      final jsonData = jsonDecode(response.body);
-      final newList = jsonData['data'];
+    if (res.statusCode == 200) {
+      print("success");
 
-      final posts = newList;
-      log("${posts.length}");
+      final jsonData = jsonDecode(res.body);
+      posts = jsonData['data'];
+      print("TOTAL = ${posts.length}");
+
+      setState(() {});
     } else {
-      log("faild");
+      print("failed");
     }
   }
 
   @override
-  State<response> createState() => _responseState();
-}
-
-class _responseState extends State<response> {
-  @override
   void initState() {
     super.initState();
-    widget.fetchData();
+    fetchData();
   }
 
   @override
@@ -47,7 +46,18 @@ class _responseState extends State<response> {
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
-      backgroundColor: Colors.white,
+      body: posts.isEmpty
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) => Card(
+                child: ListTile(
+                  leading: Text("${posts[index]['id']}"),
+                  title: Text("${posts[index]['quote']}"),
+                  subtitle: Text("${posts[index]['author']}"),
+                ),
+              ),
+            ),
     );
   }
 }
