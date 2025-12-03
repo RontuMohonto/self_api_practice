@@ -50,6 +50,7 @@ class _ResponsePageState extends State<ResponsePage> {
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: posts.length,
+
               itemBuilder: (context, index) => Card(
                 child: ListTile(
                   leading: Text("${posts[index]['id']}"),
