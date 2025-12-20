@@ -25,13 +25,7 @@ class _ResponsePageState extends State<ResponsePage> {
       final postsList = jsonData['data'] as List;
 
       for (var post in postsList) {
-        posts.add(
-          postsmodel(
-            id: post['id'],
-            quote: post['quote'],
-            author: post['author'],
-          ),
-        );
+        posts.add(postsmodel.fromjson(post));
       }
 
       setState(() {});
