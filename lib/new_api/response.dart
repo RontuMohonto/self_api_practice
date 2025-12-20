@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:self_api/new_api/model_1/model%20api.dart';
 
 class ResponsePage extends StatefulWidget {
   const ResponsePage({super.key});
@@ -10,18 +12,27 @@ class ResponsePage extends StatefulWidget {
 }
 
 class _ResponsePageState extends State<ResponsePage> {
-  List<dynamic> posts = [];
+  List<postsmodel> posts = [];
 
   Future fetchData() async {
     final url = Uri.parse("https://appapi.coderangon.com/api/slider");
-    final res = await http.get(url);
+    final response = await http.get(url);
 
-    if (res.statusCode == 200) {
+    if (response.statusCode == 200) {
       print("success");
 
-      final jsonData = jsonDecode(res.body);
-      posts = jsonData['data'];
-      print("TOTAL = ${posts.length}");
+      final jsonData = jsonDecode(response.body);
+      final postsList = jsonData['data'] as List;
+
+      for (var post in postsList) {
+        posts.add(
+          postsmodel(
+            id: post['id'],
+            quote: post['quote'],
+            author: post['author'],
+          ),
+        );
+      }
 
       setState(() {});
     } else {
@@ -39,25 +50,24 @@ class _ResponsePageState extends State<ResponsePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
         centerTitle: true,
-        title: Text(
-          "Response",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-        ),
+        title: Text("Response", style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: posts.isEmpty
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: posts.length,
 
-              itemBuilder: (context, index) => Card(
-                child: ListTile(
-                  leading: Text("${posts[index]['id']}"),
-                  title: Text("${posts[index]['quote']}"),
-                  subtitle: Text("${posts[index]['author']}"),
-                ),
-              ),
+              itemBuilder: (context, index) {
+                final data = posts[index];
+                return Card(
+                  child: ListTile(
+                    leading: Text("${data.id}"),
+                    title: Text("${data.quote}"),
+                    subtitle: Text("${data.author}"),
+                  ),
+                );
+              },
             ),
     );
   }
