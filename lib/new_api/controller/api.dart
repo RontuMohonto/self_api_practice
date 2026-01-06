@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:self_api/new_api/model_1/model%20api.dart';
 
 class apiController {
-  static Future<List<postsmodel>> fetchData() async {
+  static Future<List<postsmodel>?> fetchData() async {
     final url = Uri.parse("https://appapi.coderangon.com/api/slider");
     final response = await http.get(url);
 
@@ -22,5 +22,6 @@ class apiController {
     } else {
       print("failed");
     }
+    return null;
   }
 }

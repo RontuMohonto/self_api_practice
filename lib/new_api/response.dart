@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:self_api/new_api/controller/api.dart';
 import 'package:self_api/new_api/model_1/model%20api.dart';
 
 class ResponsePage extends StatefulWidget {
@@ -13,25 +15,12 @@ class ResponsePage extends StatefulWidget {
 
 class _ResponsePageState extends State<ResponsePage> {
   List<postsmodel> posts = [];
-
-  Future fetchData() async {
-    final url = Uri.parse("https://appapi.coderangon.com/api/slider");
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      print("success");
-
-      final jsonData = jsonDecode(response.body);
-      final postsList = jsonData['data'] as List;
-
-      for (var post in postsList) {
-        posts.add(postsmodel.fromjson(post));
-      }
-
-      setState(() {});
-    } else {
-      print("failed");
-    }
+  fetchData() async {
+    final data = await apiController.fetchData();
+    setState(() {
+      posts = data!;
+    });
+    log("=======${data!.length}==========");
   }
 
   @override
