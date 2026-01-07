@@ -15,6 +15,8 @@ class ResponsePage extends StatefulWidget {
 
 class _ResponsePageState extends State<ResponsePage> {
   List<postsmodel> posts = [];
+
+  //factory method used
   fetchData() async {
     final data = await apiController.fetchData();
     setState(() {
