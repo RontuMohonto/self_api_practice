@@ -41,7 +41,7 @@ class _ResponsePageState extends State<ResponsePage> {
         title: Text("Response", style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: FutureBuilder(
-        future: future,
+        future: apiController.fetchData(),
         builder: (context, snapshot) => posts.isEmpty
             ? Center(child: CircularProgressIndicator())
             : ListView.builder(
