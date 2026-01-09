@@ -14,24 +14,23 @@ class ResponsePage extends StatefulWidget {
 }
 
 class _ResponsePageState extends State<ResponsePage> {
-  List<postsmodel> posts = [];
-
-  //factory method used
-  fetchData() async {
-    final data = await apiController.fetchData();
-    setState(() {
-      posts = data!;
-    });
-
-    //checking whether posts is empty or not
-    log("=======${data!.length}==========");
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchData();
-  }
+  // List<postsmodel> posts = [];
+  //
+  // //factory method used
+  // fetchData() async {
+  //   final data = await apiController.fetchData();
+  //   setState(() {
+  //     posts = data!;
+  //   });
+  //   //checking whether posts is empty or not
+  //   log("=======${data!.length}==========");
+  // }
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   fetchData();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +41,11 @@ class _ResponsePageState extends State<ResponsePage> {
       ),
       body: FutureBuilder(
         future: apiController.fetchData(),
-        builder: (context, snapshot) => posts.isEmpty
-            ? Center(child: CircularProgressIndicator())
-            : ListView.builder(
-                itemCount: posts.length,
+        builder: (context, snapshot) => ListView.builder(
+                itemCount: snapshot.data!.length,
 
                 itemBuilder: (context, index) {
-                  final data = posts[index];
+                  final data = snapshot.data![index];
                   return Card(
                     child: ListTile(
                       leading: Text("${data.id}"),
