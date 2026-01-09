@@ -22,6 +22,8 @@ class _ResponsePageState extends State<ResponsePage> {
     setState(() {
       posts = data!;
     });
+
+    //checking whether posts is empty or not
     log("=======${data!.length}==========");
   }
 
