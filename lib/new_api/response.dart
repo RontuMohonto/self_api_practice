@@ -41,20 +41,25 @@ class _ResponsePageState extends State<ResponsePage> {
       ),
       body: FutureBuilder(
         future: apiController.fetchData(),
-        builder: (context, snapshot) => ListView.builder(
-                itemCount: snapshot.data!.length,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
 
-                itemBuilder: (context, index) {
-                  final data = snapshot.data![index];
-                  return Card(
-                    child: ListTile(
-                      leading: Text("${data.id}"),
-                      title: Text("${data.quote}"),
-                      subtitle: Text("${data.author}"),
-                    ),
-                  );
-                },
-              ),
+            itemBuilder: (context, index) {
+              final data = snapshot.data![index];
+              return Card(
+                child: ListTile(
+                  leading: Text("${data.id}"),
+                  title: Text("${data.quote}"),
+                  subtitle: Text("${data.author}"),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
