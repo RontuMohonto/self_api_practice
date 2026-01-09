@@ -40,22 +40,25 @@ class _ResponsePageState extends State<ResponsePage> {
         centerTitle: true,
         title: Text("Response", style: TextStyle(fontWeight: FontWeight.bold)),
       ),
-      body: posts.isEmpty
-          ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: posts.length,
+      body: FutureBuilder(
+        future: future,
+        builder: (context, snapshot) => posts.isEmpty
+            ? Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: posts.length,
 
-              itemBuilder: (context, index) {
-                final data = posts[index];
-                return Card(
-                  child: ListTile(
-                    leading: Text("${data.id}"),
-                    title: Text("${data.quote}"),
-                    subtitle: Text("${data.author}"),
-                  ),
-                );
-              },
-            ),
+                itemBuilder: (context, index) {
+                  final data = posts[index];
+                  return Card(
+                    child: ListTile(
+                      leading: Text("${data.id}"),
+                      title: Text("${data.quote}"),
+                      subtitle: Text("${data.author}"),
+                    ),
+                  );
+                },
+              ),
+      ),
     );
   }
 }
