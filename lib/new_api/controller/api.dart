@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:self_api/new_api/model_1/model%20api.dart';
 
-class apiController {
+class ApiController {
   static Future<List<postsmodel>?> fetchData() async {
     final url = Uri.parse("https://appapi.coderangon.com/api/slider");
     final response = await http.get(url);

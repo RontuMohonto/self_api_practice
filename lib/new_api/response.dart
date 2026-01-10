@@ -40,7 +40,7 @@ class _ResponsePageState extends State<ResponsePage> {
         title: Text("Response", style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: FutureBuilder(
-        future: apiController.fetchData(),
+        future: ApiController.fetchData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -50,6 +50,7 @@ class _ResponsePageState extends State<ResponsePage> {
 
             itemBuilder: (context, index) {
               final data = snapshot.data![index];
+              //main card
               return Card(
                 child: ListTile(
                   leading: Text("${data.id}"),
