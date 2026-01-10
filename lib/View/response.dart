@@ -56,7 +56,9 @@ class _ResponsePageState extends State<ResponsePage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => details(id:data.id.toString())),
+                    MaterialPageRoute(
+                      builder: (context) => details(id: data.id),
+                    ),
                   );
                 },
                 child: Card(

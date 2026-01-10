@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:self_api/new_api/model_1/model%20api.dart';
 
+import '../model_1/details.dart';
+
 class ApiController {
   static Future<List<postsmodel>?> fetchData() async {
     final url = Uri.parse("https://appapi.coderangon.com/api/slider");
@@ -23,5 +25,11 @@ class ApiController {
       print("failed");
     }
     return null;
+  }
+
+  static Future<postdetailsModel?> getData({required int id}) async {
+    final response = await http.get(
+      Uri.parse(("https://appapi.coderangon.com/api/quotations/${id}")),
+    );
   }
 }

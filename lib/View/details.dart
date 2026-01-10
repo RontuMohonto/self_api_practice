@@ -5,7 +5,7 @@ class details extends StatefulWidget {
   const details({super.key, required this.id});
 
 
-  final String id;
+  final int id;
 
   @override
   State<details> createState() => _detailsState();
