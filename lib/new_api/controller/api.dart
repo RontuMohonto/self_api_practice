@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:self_api/new_api/model_1/model%20api.dart';
@@ -32,7 +33,10 @@ class ApiController {
       Uri.parse(("https://appapi.coderangon.com/api/quotations/${id}")),
     );
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      final decoded = jsonDecode(response.body);
+      return postdetailsModel.fromjson(decoded);
+    } else {
+      log("Error is : ${response.body}");
     }
   }
 }
