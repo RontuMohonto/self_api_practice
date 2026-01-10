@@ -24,9 +24,11 @@ class _detailsState extends State<details> {
       ),
       body: FutureBuilder(
         future: ApiController.getData(id: widget.ID),
-        builder: (_, snapshot) {
+        builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return Column(children: [Text("Details screen")]);
           }
         },
       ),
