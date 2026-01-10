@@ -31,5 +31,8 @@ class ApiController {
     final response = await http.get(
       Uri.parse(("https://appapi.coderangon.com/api/quotations/${id}")),
     );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    }
   }
 }
