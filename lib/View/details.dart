@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../new_api/controller/api.dart';
 
 class details extends StatefulWidget {
-  const details({super.key, required this.id});
+  const details({super.key, required this.ID});
 
-
-  final int id;
+  final int ID;
 
   @override
   State<details> createState() => _detailsState();
@@ -16,9 +16,19 @@ class _detailsState extends State<details> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.id}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
+        title: Text(
+          "${widget.ID}",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+        ),
         centerTitle: true,
-
+      ),
+      body: FutureBuilder(
+        future: ApiController.getData(id: widget.ID),
+        builder: (_, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }

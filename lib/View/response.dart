@@ -57,7 +57,7 @@ class _ResponsePageState extends State<ResponsePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => details(id: data.id),
+                      builder: (context) => details(ID: data.id),
                     ),
                   );
                 },
