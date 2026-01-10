@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:self_api/View/details.dart';
 import 'package:self_api/new_api/controller/api.dart';
 import 'package:self_api/new_api/model_1/model%20api.dart';
 
@@ -53,7 +54,10 @@ class _ResponsePageState extends State<ResponsePage> {
               //main card
               return InkWell(
                 onTap: () {
-                  log("============");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => details()),
+                  );
                 },
                 child: Card(
                   child: ListTile(
