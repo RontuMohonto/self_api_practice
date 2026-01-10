@@ -51,11 +51,16 @@ class _ResponsePageState extends State<ResponsePage> {
             itemBuilder: (context, index) {
               final data = snapshot.data![index];
               //main card
-              return Card(
-                child: ListTile(
-                  leading: Text("${data.id}"),
-                  title: Text("${data.quote}"),
-                  subtitle: Text("${data.author}"),
+              return InkWell(
+                onTap: () {
+                  log("============");
+                },
+                child: Card(
+                  child: ListTile(
+                    leading: Text("${data.id}"),
+                    title: Text("${data.quote}"),
+                    subtitle: Text("${data.author}"),
+                  ),
                 ),
               );
             },
