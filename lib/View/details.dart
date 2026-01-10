@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 
 class details extends StatefulWidget {
-  const details({super.key});
+  const details({super.key, required this.id});
+
+
+  final String id;
 
   @override
   State<details> createState() => _detailsState();
@@ -13,7 +16,7 @@ class _detailsState extends State<details> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Details",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
+        title: Text("${widget.id}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
         centerTitle: true,
 
       ),
