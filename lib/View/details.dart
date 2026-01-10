@@ -27,8 +27,16 @@ class _detailsState extends State<details> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
+          }
+          if (!snapshot.hasData || snapshot.data == null) {
+            return const Center(child: Text('No data found'));
           } else {
-            return Column(children: [Text("Details screen")]);
+            return Column(
+              children: [
+                Text(snapshot.data!.quote),
+                Text(snapshot.data!.author),
+              ],
+            );
           }
         },
       ),

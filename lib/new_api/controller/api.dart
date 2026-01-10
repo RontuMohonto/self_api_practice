@@ -34,9 +34,10 @@ class ApiController {
     );
     if (response.statusCode == 200) {
       final decoded = jsonDecode(response.body);
-      return postdetailsModel.fromjson(decoded);
+      return postdetailsModel.fromjson(decoded['data']);
     } else {
       log("Error is : ${response.body}");
+      return null;
     }
   }
 }
