@@ -15,6 +15,7 @@ class _detailsState extends State<details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //appber
       appBar: AppBar(
         title: Text(
           "${widget.ID}",
@@ -22,9 +23,11 @@ class _detailsState extends State<details> {
         ),
         centerTitle: true,
       ),
+      //body
       body: FutureBuilder(
         future: ApiController.getData(id: widget.ID),
         builder: (context, snapshot) {
+          //snapshot
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
